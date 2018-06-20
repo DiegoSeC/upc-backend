@@ -9,4 +9,9 @@ router.post('/', function(req, res, next) {
   res.json(user);
 });
 
+router.get('/', function(req, res, next) {
+  var user = {token: 123};
+  res.json(user);
+});
+
 module.exports = router;

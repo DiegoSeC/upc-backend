@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
 
   model.then((user) => {
     if (!user) {
-      res.json({token: '', err: 'NO_USER_FOUND'});
+      res.json({token: null, err: 'NO_USER_FOUND'});
       return;
     }
 

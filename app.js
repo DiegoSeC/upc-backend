@@ -9,32 +9,16 @@ var sassMiddleware = require('node-sass-middleware');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/authentication');
+const reservationRouter = require('./routes/reservation');
 
 var app = express();
 
 const jwt = require('express-jwt');
-const jwtAuthz = require('express-jwt-authz');
-const jwksRsa = require('jwks-rsa');
 
-// Authentication middleware. When used, the
-// Access Token must exist and be verified against
-// the Auth0 JSON Web Key Set
-const checkJwt = jwt({
-  // Dynamically provide a signing key
-  // based on the kid in the header and
-  // the signing keys provided by the JWKS endpoint.
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://upc-android.auth0.com/.well-known/jwks.json`
-  }),
-
-  // Validate the audience and the issuer.
-  audience: 'https://upc.diegoseminario.com/',
-  issuer: `https://upc-android.auth0.com/`,
-  algorithms: ['RS256']
+const jwtMiddleWare = jwt({
+  secret: process.env.SECURITY_TOKEN
 });
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -55,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/auth', authRouter);
+app.use('/reservation', jwtMiddleWare, reservationRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -19,6 +19,9 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOSTNAME,
     dialect: 'mysql',
-    operatorsAliases: Sequelize.Op
+    operatorsAliases: Sequelize.Op,
+    dialectOptions: {
+      insecureAuth: true
+    }
   }
 };

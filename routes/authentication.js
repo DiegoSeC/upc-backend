@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 
     res.json({token: token});
   });
-  
+
 });
 
 module.exports = router;

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   let model = Barber.findAll();
 
   model.then((barbers) => {
-    res.json({barbers: barbers});
+    res.json(barbers);
   }, () => {
     res.json({error: 'Couldn\'t load barbers'});
   });

@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING
   });
 
+  User.associate = (models) => {
+    models.User.hasMany(models.CreditCard);
+  };
+
   User.sync().then(() => {
     return User.findOne({
       where: {

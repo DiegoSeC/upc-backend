@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var authRouter = require('./routes/authentication');
 const reservationRouter = require('./routes/reservation');
 const barberRouter = require('./routes/barbers');
+const creditRouter = require('./routes/credit_card');
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/user', jwtMiddleWare, usersRouter);
 app.use('/auth', authRouter);
 app.use('/reservation', jwtMiddleWare, reservationRouter);
 app.use('/barber', jwtMiddleWare, barberRouter);
+app.use('/credit_card', jwtMiddleWare, creditRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

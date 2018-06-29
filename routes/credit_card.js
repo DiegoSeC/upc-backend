@@ -2,27 +2,24 @@ const express = require('express');
 const router = express.Router();
 
 const models = require('../models');
-const User = models.User;
+const CreditCard = models.CreditCard;
 
 router.get('/', (req, res, next) => {
   let userId = req.user.id;
 
-  let model = User.findOne({
+  let model = CreditCard.findAll({
     where: {
-      id: userId
-    },
-    attributes: {
-      exclude: ['password']
+      UserId: userId
     },
     raw: true
   });
 
-  model.then(user => {
-    if(!user) {
-      return res.json({error: 'User not found'});
+  model.then(creditCards => {
+    if(!creditCards) {
+      return res.json([]);
     }
 
-    return res.json(user);
+    return res.json(creditCards);
   });
 });
 

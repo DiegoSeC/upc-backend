@@ -23,4 +23,22 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/', (req, res, next) => {
+  let userId = req.user.id;
+  let params = req.body;
+
+  let creditCard = {
+    name: params.name,
+    number: params.number,
+    ccv: params.ccv,
+    type: params.type,
+    exp: params.exp,
+    UserId: userId
+  };
+
+  CreditCard.create(creditCard);
+
+  return res.json(creditCard);
+});
+
 module.exports = router;

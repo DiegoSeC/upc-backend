@@ -42,10 +42,10 @@ app.use('/', indexRouter);
 app.use('/user', jwtMiddleWare, usersRouter);
 
 app.use('/auth', authRouter);
-app.use('/reservation', jwtMiddleWare, reservationRouter);
-app.use('/barber', jwtMiddleWare, barberRouter);
-app.use('/credit_card', jwtMiddleWare, creditRouter);
-app.use('/hair_cut', jwtMiddleWare, hairCutRouter);
+app.use('/reservations', jwtMiddleWare, reservationRouter);
+app.use('/barbers', jwtMiddleWare, barberRouter);
+app.use('/credit_cards', jwtMiddleWare, creditRouter);
+app.use('/hair_cuts', jwtMiddleWare, hairCutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
